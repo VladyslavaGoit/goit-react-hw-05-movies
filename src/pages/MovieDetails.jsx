@@ -1,11 +1,21 @@
 import { fetchMovieById } from 'API/fetchMovies';
+import { useRef } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const linkRef = useRef();
+  console.log(linkRef.current);
   useEffect(() => {
     const getMovie = async () => {
       try {
@@ -17,9 +27,13 @@ const MovieDetails = () => {
     };
     getMovie();
   }, [movieId]);
+
   return (
     <>
       <section>
+        <Link ref={linkRef} to={location?.state?.from ?? '/'}>
+          Back
+        </Link>
         {movie && (
           <div>
             <img
@@ -56,7 +70,7 @@ const MovieDetails = () => {
         </ul>
       </section>
       <section>
-        <Outlet />
+        <Outlet ref={linkRef} />
       </section>
     </>
   );
