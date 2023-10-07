@@ -5,19 +5,35 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import { Error } from 'components/Error/Error';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   useEffect(() => {
     const getMovies = async () => {
       if (query.trim()) {
         try {
+          setError(false);
+          setLoading(true);
           const fetchedMovies = await fetchMoviesByQuery(query);
           setMovies(fetchedMovies.results);
+          if (!fetchedMovies.results.length) {
+            toast(
+              `No movies was found for the request of '${query}'. Please try again.`,
+              {
+                icon: '🤷‍♂️',
+              }
+            );
+            throw new Error();
+          }
         } catch (error) {
-          console.log(error);
+          setError(true);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -39,7 +55,9 @@ const Movies = () => {
   return (
     <>
       <SearchForm onSubmit={handleSubmitForm} />
+      {loading && <div>Loading...</div>}
       {movies && <MoviesList movies={movies} />}
+      {error && <Error />}
       <Toaster />
     </>
   );
