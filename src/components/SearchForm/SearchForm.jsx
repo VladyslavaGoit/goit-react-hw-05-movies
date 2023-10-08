@@ -1,8 +1,13 @@
+import { Button, Form } from './SearchForm.styled';
+import { GoSearch } from 'react-icons/go';
+
 export const SearchForm = ({ onSubmit }) => {
   return (
-    <form onSubmit={event => onSubmit(event)}>
+    <Form onSubmit={event => onSubmit(event)}>
       <input type="text" name="query" />
-      <button type="submit">Search</button>
-    </form>
+      <Button type="submit">
+        <GoSearch size={19} />
+      </Button>
+    </Form>
   );
 };

@@ -3,6 +3,7 @@ import { Error } from 'components/Error/Error';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { List, Title } from './Reviews.styled';
 
 export const Reviews = () => {
   const { movieId } = useParams();
@@ -28,14 +29,14 @@ export const Reviews = () => {
     <div>
       {loading && <div>Loading...</div>}
       {movieReviews && (
-        <ul>
+        <List>
           {movieReviews.map(({ id, author, content }) => (
             <li key={id}>
-              <h3>Author: {author}</h3>
+              <Title>Author: {author}</Title>
               <p>{content}</p>
             </li>
           ))}
-        </ul>
+        </List>
       )}
       {movieReviews && !loading && (
         <div>We don't have any reviews for this movie.</div>

@@ -3,6 +3,7 @@ import { Error } from 'components/Error/Error';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Title } from './Home.styled';
 
 const Home = () => {
   const [movies, setMovies] = useState(null);
@@ -27,7 +28,7 @@ const Home = () => {
 
   return (
     <div>
-      <h2>Trending today</h2>
+      <Title>Trending today</Title>
       {loading && <div>Loading...</div>}
       {movies && <MoviesList movies={movies} />}
       {error && <Error />}

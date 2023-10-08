@@ -4,6 +4,7 @@ import { Error } from 'components/Error/Error';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { List } from './Cast.styled';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -29,7 +30,7 @@ export const Cast = () => {
     <>
       {loading && <div>Loading...</div>}
       {movieCast && (
-        <ul>
+        <List>
           {movieCast.map(({ id, name, profile_path, character }) => (
             <li key={id}>
               <CastCard
@@ -39,7 +40,7 @@ export const Cast = () => {
               />
             </li>
           ))}
-        </ul>
+        </List>
       )}
       {error && <Error />}
     </>

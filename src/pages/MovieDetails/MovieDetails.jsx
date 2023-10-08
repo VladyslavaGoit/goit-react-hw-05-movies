@@ -5,7 +5,15 @@ import { HiArrowLeft } from 'react-icons/hi';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
-import { BackLink, Section } from './MovieDetails.styled';
+import {
+  BackLink,
+  DescriptionBox,
+  InfoList,
+  InfoTitle,
+  ListGenres,
+  MovieBox,
+  Section,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -41,7 +49,7 @@ const MovieDetails = () => {
       {movie && (
         <div>
           <Section>
-            <div>
+            <MovieBox>
               <img
                 src={
                   movie['backdrop_path']
@@ -50,7 +58,7 @@ const MovieDetails = () => {
                 }
                 alt={`Poster movie ${movie.title}`}
               />
-              <div>
+              <DescriptionBox>
                 <h2>{movie.title}</h2>
                 <p>
                   User score: <br />
@@ -59,28 +67,26 @@ const MovieDetails = () => {
                 <h3>Overview</h3>
                 <p>{movie.overview}</p>
                 <h3>Genres</h3>
-                <ul>
+                <ListGenres>
                   {movie.genres.map(({ id, name }) => (
                     <li key={id}>{name}</li>
                   ))}
-                </ul>
-              </div>
-            </div>
+                </ListGenres>
+              </DescriptionBox>
+            </MovieBox>
           </Section>
           <Section>
-            <p>Additional information</p>
-            <ul>
+            <InfoTitle>Additional information</InfoTitle>
+            <InfoList>
               <li>
                 <NavLink to="cast">Cast</NavLink>
               </li>
               <li>
                 <NavLink to="reviews">Reviews</NavLink>
               </li>
-            </ul>
+            </InfoList>
           </Section>
-          <Section>
-            <Outlet />
-          </Section>
+          <Outlet />
         </div>
       )}
       {error && <Error />}
