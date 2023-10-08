@@ -13,6 +13,7 @@ const Movies = () => {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
   useEffect(() => {
     const getMovies = async () => {
       if (query.trim()) {
@@ -28,7 +29,6 @@ const Movies = () => {
                 icon: '🤷‍♂️',
               }
             );
-            throw new Error();
           }
         } catch (error) {
           setError(true);
