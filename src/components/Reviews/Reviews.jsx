@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { List, Title } from './Reviews.styled';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [movieReviews, setMovieReviews] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -45,3 +45,4 @@ export const Reviews = () => {
     </div>
   );
 };
+export default Reviews;

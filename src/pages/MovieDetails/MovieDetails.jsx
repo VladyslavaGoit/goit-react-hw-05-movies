@@ -14,6 +14,7 @@ import {
   MovieBox,
   Section,
 } from './MovieDetails.styled';
+import { Suspense } from 'react';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -86,7 +87,9 @@ const MovieDetails = () => {
               </li>
             </InfoList>
           </Section>
-          <Outlet />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
         </div>
       )}
       {error && <Error />}

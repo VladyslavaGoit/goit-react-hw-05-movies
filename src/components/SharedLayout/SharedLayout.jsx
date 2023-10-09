@@ -6,6 +6,7 @@ import {
   NavList,
   StyledLink,
 } from './SharedLayout.styled';
+import { Suspense } from 'react';
 
 export const SharedLayout = () => {
   return (
@@ -25,9 +26,11 @@ export const SharedLayout = () => {
         </LayuotGrid>
       </Header>
       <main>
-        <LayuotGrid>
-          <Outlet />
-        </LayuotGrid>
+        <Suspense fallback={<div>Loading...</div>}>
+          <LayuotGrid>
+            <Outlet />
+          </LayuotGrid>
+        </Suspense>
       </main>
       <footer></footer>
     </Container>
