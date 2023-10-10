@@ -4,7 +4,6 @@ import { HiArrowLeft } from 'react-icons/hi';
 
 const NotFound = () => {
   const location = useLocation();
-  console.log(location);
   return (
     <Wrapper>
       <img
